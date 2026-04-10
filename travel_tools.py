@@ -9,12 +9,11 @@ import json
 import urllib.error
 import urllib.parse
 import urllib.request
-import streamlit as st
 from typing import Any
 
 from langchain.tools import tool
 
-USER_AGENT = "SeasonalTravelPlanner/1.0 (educational; curser_project/seed.yaml)"
+USER_AGENT = "SeasonalTravelPlanner/1.0 (travel_tool; seed.yaml)"
 
 # 날씨 1차 필터 (야외 활동 부담 — seed 수용 기준)
 MEAN_DAILY_MAX_TOO_HOT_C = 35.0
@@ -315,37 +314,3 @@ TRAVEL_SYSTEM_PROMPT = """당신은 한국어로 답하는 해외 여행 기획 
 사용자 메시지 앞에 붙는 [사용자 설정] 블록(계절, 통화, 예산 상한, 스타일)을 반드시 반영하세요.
 정확한 항공·호텔 가격이나 비자 판단은 하지 마세요(seed 비목표).
 모델은 도구 결과를 근거로 요약하고, 분기(날씨 탈락 후 다른 도시로 진행)를 설명에 드러내세요."""
-
-# ... (기존 코드들 아래에 추가)
-
-
-
-def main():
-    st.title("🌍 AI 해외여행 플래너")
-    st.sidebar.header("여행 설정")
-    
-    # 1. 사용자 입력 받기
-    season = st.sidebar.selectbox("계절을 선택하세요", ["봄", "여름", "가을", "겨울"])
-    budget = st.sidebar.number_input("총 예산", min_value=100, value=2000)
-    currency = st.sidebar.selectbox("통화", ["KRW", "USD", "EUR", "JPY"])
-    days = st.sidebar.slider("여행 기간(일)", 1, 30, 7)
-
-    st.write(f"### {season}에 떠나는 여행 추천")
-    
-    # 2. 버튼을 누르면 도구 실행 프로세스 시작
-    if st.button("추천 목록 가져오기"):
-        with st.spinner("후보 도시를 찾는 중..."):
-            # list_candidate_cities_for_season 도구 실행
-            candidates = list_candidate_cities_for_season.invoke(season)
-            st.info(candidates)
-            
-            # filter_cities_by_weather_comfort 도구 실행 (텍스트 파싱 등은 생략한 단순 시연)
-            st.write("---")
-            st.write("#### 🌦️ 날씨 적합도 체크 결과")
-            # candidates 결과에서 도시 목록만 추출하는 로직이 필요하지만, 
-            # 일단은 전체 블록을 넣어 실행되는지 확인합니다.
-            weather_result = filter_cities_by_weather_comfort.invoke({"season": season, "cities_block": candidates})
-            st.success(weather_result)
-
-if __name__ == "__main__":
-    main()

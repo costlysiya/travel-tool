@@ -1,5 +1,7 @@
-streamlit
-langchain
-langchain-openai
-langchain-community
-pydantic<2.0.0
+# travel_tool — Streamlit + LangChain ReAct
+langchain>=0.3.0
+langchain-openai>=0.2.0
+langchain-core>=0.3.0
+langgraph>=0.2.0
+python-dotenv>=1.0.0
+streamlit>=1.40.0
