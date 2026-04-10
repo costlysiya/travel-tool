@@ -3,11 +3,6 @@
 seed.yaml 기반 해외여행 추천용 LangChain 도구.
 Open-Meteo(날씨), Frankfurter(환율), Nominatim(지오코딩), Wikipedia(요약) — 키 불필요 조합.
 """
-import streamlit as st
-
-st.title("연결 확인!")
-st.write("이 글자가 보이면 성공입니다.")
-
 from __future__ import annotations
 
 import json
@@ -17,6 +12,10 @@ import urllib.request
 from typing import Any
 
 from langchain.tools import tool
+import streamlit as st
+
+st.title("연결 확인!")
+st.write("이 글자가 보이면 성공입니다.")
 
 USER_AGENT = "SeasonalTravelPlanner/1.0 (educational; curser_project/seed.yaml)"
 
