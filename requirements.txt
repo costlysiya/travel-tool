@@ -1,13 +1,5 @@
-# 01_langchain_review.ipynb 환경 (섹션 1)
-langchain>=0.3.0
-langchain-openai>=0.2.0
-langchain-core>=0.3.0
-langgraph>=0.2.0
-chromadb>=0.5.0
-python-dotenv>=1.0.0
-
-
 streamlit
 langchain
-langchain-core
-pydantic<2.0.0  # 만약 v1 호환성이 문제라면
+langchain-openai
+langchain-community
+pydantic<2.0.0
